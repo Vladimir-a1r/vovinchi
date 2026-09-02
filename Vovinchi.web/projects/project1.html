@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Personal Website - Vovinchi</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .project-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 80px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .project-back {
+            position: fixed;
+            top: 25px;
+            left: 30px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: 0.3s ease;
+            z-index: 10;
+        }
+
+        .project-back:hover {
+            color: #39ff14;
+            text-shadow: 0 0 10px #39ff14;
+        }
+
+        .project-label {
+            color: #39ff14;
+            font-size: 13px;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #39ff14;
+        }
+
+        .project-page h1 {
+            margin: 0;
+            font-size: clamp(42px, 8vw, 90px);
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #9d4edd,
+                #ff4fd8,
+                #39ff14
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: projectGradient 6s ease infinite;
+        }
+
+        .project-subtitle {
+            max-width: 650px;
+            margin: 25px auto 0;
+            color: #999999;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .project-star-large {
+            margin: 60px 0 50px;
+            font-size: 150px;
+            line-height: 1;
+            color: #ffffff;
+            text-shadow:
+                0 0 10px #ffffff,
+                0 0 30px #9d4edd,
+                0 0 60px #ff4fd8,
+                0 0 100px #9d4edd;
+            animation: projectStarGlow 3s ease-in-out infinite;
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+
+        .project-info-card {
+            width: 220px;
+            padding: 25px;
+            box-sizing: border-box;
+            border: 1px solid #832194;
+            border-radius: 10px;
+            background: rgba(8, 8, 8, 0.8);
+            transition: 0.3s ease;
+        }
+
+        .project-info-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff4fd8;
+            box-shadow:
+                0 0 15px #9d4edd,
+                0 0 30px rgba(255, 79, 216, 0.3);
+        }
+
+        .project-info-card span {
+            display: block;
+            color: #39ff14;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .project-info-card h3 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        .project-description {
+            max-width: 700px;
+            margin-top: 60px;
+            color: #999999;
+            line-height: 1.8;
+        }
+
+        .project-description h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            margin-top: 35px;
+            color: #ffffff;
+            letter-spacing: 2px;
+        }
+
+        @keyframes projectGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes projectStarGlow {
+            0% {
+                opacity: 0.45;
+                transform: scale(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+
+            100% {
+                opacity: 0.45;
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .project-page {
+                padding-top: 100px;
+            }
+
+            .project-back {
+                top: 20px;
+                left: 20px;
+            }
+
+            .project-star-large {
+                font-size: 100px;
+                margin: 45px 0;
+            }
+
+            .project-subtitle {
+                font-size: 16px;
+            }
+
+            .project-info-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .project-description {
+                margin-top: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="shootingStars"></div>
+    <div id="cursorGlow"></div>
+
+    <a href="../index.html" class="project-back">
+        ← BACK TO PORTFOLIO
+    </a>
+
+    <main class="project-page">
+
+        </div>
+
+        <h1>PERSONAL WEBSITE</h1>
+
+        <p class="project-subtitle">
+            My own web development project —
+            a personal portfolio website created from scratch
+            using HTML, CSS and JavaScript.
+        </p>
+
+        <div class="project-star-large">
+            ✦
+        </div>
+
+        <div class="project-info">
+
+            <div class="project-info-card">
+                <span>TYPE</span>
+                <h3>PERSONAL PORTFOLIO</h3>
+            </div>
+
+            <div class="project-info-card">
+                <span>YEAR</span>
+                <h3>2026</h3>
+            </div>
+
+            <div class="project-info-card">
+                <span>ROLE</span>
+                <h3>WEB DEVELOPER</h3>
+            </div>
+
+        </div>
+
+        <div class="project-description">
+
+            <h2>ABOUT THE PROJECT</h2>
+
+            <p>
+                This website was created as my first personal
+                web development project. The main goal was to
+                create a modern and interactive portfolio while
+                learning HTML, CSS and JavaScript.
+            </p>
+
+            <p>
+                The design combines a dark space-inspired
+                atmosphere with neon colors, animated elements
+                and interactive components.
+            </p>
+<p class="copyright">
+    © 2026 Vladimir Biletskyi. All Rights Reserved.
+</p>
+            <div class="project-tech">
+                HTML &nbsp; • &nbsp; CSS &nbsp; • &nbsp; JAVASCRIPT
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="../script.js"></script>
+
+</body>
+</html>
