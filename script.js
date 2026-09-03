@@ -43,40 +43,34 @@ const closeAbout = document.getElementById("closeAbout");
 let aboutScrollPosition = 0;
 
 
-// ОТКРЫТИЕ ABOUT ME
 function openAbout() {
     if (!aboutPanel) return;
 
-    // Запоминаем место, где находится страница
     aboutScrollPosition = window.scrollY;
 
-    // Фиксируем страницу
     document.body.classList.add("about-open");
 
-    // Открываем панель
     aboutPanel.classList.add("active");
 
-    // Возвращаем scroll точно на прежнее место
     window.scrollTo(0, aboutScrollPosition);
 }
 
 
-// ЗАКРЫТИЕ ABOUT ME
+
 function closeAboutPanel() {
     if (!aboutPanel) return;
 
-    // Закрываем панель
+
     aboutPanel.classList.remove("active");
 
-    // Разблокируем страницу
+
     document.body.classList.remove("about-open");
 
-    // Возвращаемся ровно туда, где были
+
     window.scrollTo(0, aboutScrollPosition);
 }
 
 
-// Кнопка ABOUT ME
 if (aboutButton) {
     aboutButton.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -84,8 +78,6 @@ if (aboutButton) {
     });
 }
 
-
-// Кнопка X
 if (closeAbout) {
     closeAbout.addEventListener("click", (event) => {
         event.stopPropagation();
@@ -94,7 +86,6 @@ if (closeAbout) {
 }
 
 
-// Клик вне панели
 document.addEventListener("click", (event) => {
 
     if (!aboutPanel || !aboutButton) return;
@@ -113,50 +104,49 @@ document.addEventListener("click", (event) => {
 // SWIPE LEFT TO CLOSE ABOUT ME
 // ==============================
 
-let touchStartX = 0;
-let touchStartY = 0;
+let swipeStartX = 0;
+let swipeStartY = 0;
+let swipeCurrentX = 0;
 
 if (aboutPanel) {
 
-    aboutPanel.addEventListener(
-        "touchstart",
-        (event) => {
+    aboutPanel.addEventListener("touchstart", (e) => {
 
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
+        const touch = e.touches[0];
 
-        },
-        { passive: true }
-    );
+        swipeStartX = touch.clientX;
+        swipeStartY = touch.clientY;
+        swipeCurrentX = touch.clientX;
 
-
-    aboutPanel.addEventListener(
-        "touchend",
-        (event) => {
-
-            const touchEndX = event.changedTouches[0].clientX;
-            const touchEndY = event.changedTouches[0].clientY;
-
-            const distanceX = touchEndX - touchStartX;
-            const distanceY = touchEndY - touchStartY;
+    }, { passive: true });
 
 
-            // Only horizontal swipe
-            const horizontal =
-                Math.abs(distanceX) > Math.abs(distanceY);
+    aboutPanel.addEventListener("touchmove", (e) => {
+
+        const touch = e.touches[0];
+
+        swipeCurrentX = touch.clientX;
+
+    }, { passive: true });
 
 
-            // Swipe left
-            const swipeLeft = distanceX < -60;
+    aboutPanel.addEventListener("touchend", () => {
 
+        const moveX = swipeCurrentX - swipeStartX;
+        const moveY = Math.abs(
+            swipeStartY -
+            event.changedTouches[0].clientY
+        );
 
-            if (horizontal && swipeLeft) {
-                closeAboutPanel();
-            }
+        if (
+            moveX < -50 &&
+            Math.abs(moveX) > moveY
+        ) {
+            closeAboutPanel();
+        }
 
-        },
-        { passive: true }
-    );
+    }, { passive: true });
+
 }
 // ==============================
 // REVEAL ANIMATION
@@ -233,8 +223,6 @@ setInterval(() => {
 // SERVICE CARDS
 // ==============================
 
-// Карточка открывается,
-// но больше НИКОГДА не закрывается по повторному нажатию.
 
 const serviceCards = document.querySelectorAll(".service-card");
 
