@@ -40,25 +40,63 @@ const aboutButton = document.getElementById("aboutButton");
 const aboutPanel = document.getElementById("aboutPanel");
 const closeAbout = document.getElementById("closeAbout");
 
+let aboutScrollPosition = 0;
 
-// Открыть панель
-if (aboutButton && aboutPanel) {
-    aboutButton.addEventListener("click", () => {
-        aboutPanel.classList.add("active");
+
+// ОТКРЫТИЕ ABOUT ME
+function openAbout() {
+    if (!aboutPanel) return;
+
+    // Запоминаем место, где находится страница
+    aboutScrollPosition = window.scrollY;
+
+    // Фиксируем страницу
+    document.body.classList.add("about-open");
+
+    // Открываем панель
+    aboutPanel.classList.add("active");
+
+    // Возвращаем scroll точно на прежнее место
+    window.scrollTo(0, aboutScrollPosition);
+}
+
+
+// ЗАКРЫТИЕ ABOUT ME
+function closeAboutPanel() {
+    if (!aboutPanel) return;
+
+    // Закрываем панель
+    aboutPanel.classList.remove("active");
+
+    // Разблокируем страницу
+    document.body.classList.remove("about-open");
+
+    // Возвращаемся ровно туда, где были
+    window.scrollTo(0, aboutScrollPosition);
+}
+
+
+// Кнопка ABOUT ME
+if (aboutButton) {
+    aboutButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openAbout();
     });
 }
 
 
-// Закрыть по кнопке X
-if (closeAbout && aboutPanel) {
-    closeAbout.addEventListener("click", () => {
-        aboutPanel.classList.remove("active");
+// Кнопка X
+if (closeAbout) {
+    closeAbout.addEventListener("click", (event) => {
+        event.stopPropagation();
+        closeAboutPanel();
     });
 }
 
 
-// Закрыть по клику вне панели
+// Клик вне панели
 document.addEventListener("click", (event) => {
+
     if (!aboutPanel || !aboutButton) return;
 
     if (
@@ -66,7 +104,7 @@ document.addEventListener("click", (event) => {
         !aboutPanel.contains(event.target) &&
         !aboutButton.contains(event.target)
     ) {
-        aboutPanel.classList.remove("active");
+        closeAboutPanel();
     }
 });
 
@@ -75,16 +113,15 @@ document.addEventListener("click", (event) => {
 // SWIPE LEFT TO CLOSE ABOUT ME
 // ==============================
 
-if (aboutPanel) {
+let touchStartX = 0;
+let touchStartY = 0;
 
-    let touchStartX = 0;
-    let touchStartY = 0;
+if (aboutPanel) {
 
     aboutPanel.addEventListener(
         "touchstart",
         (event) => {
 
-            // Берём начальную позицию пальца
             touchStartX = event.touches[0].clientX;
             touchStartY = event.touches[0].clientY;
 
@@ -104,25 +141,23 @@ if (aboutPanel) {
             const distanceY = touchEndY - touchStartY;
 
 
-            // Проверяем, что движение именно горизонтальное
-            const isHorizontalSwipe =
+            // Only horizontal swipe
+            const horizontal =
                 Math.abs(distanceX) > Math.abs(distanceY);
 
 
-            // Свайп влево минимум 60px
-            const isSwipeLeft = distanceX < -60;
+            // Swipe left
+            const swipeLeft = distanceX < -60;
 
 
-            if (isHorizontalSwipe && isSwipeLeft) {
-                aboutPanel.classList.remove("active");
+            if (horizontal && swipeLeft) {
+                closeAboutPanel();
             }
 
         },
         { passive: true }
     );
 }
-
-
 // ==============================
 // REVEAL ANIMATION
 // ==============================
