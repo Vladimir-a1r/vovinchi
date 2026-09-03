@@ -95,17 +95,11 @@ setInterval(() => {
     }
 
 }, 2500);
+js
 const serviceCards = document.querySelectorAll(".service-card");
 
 serviceCards.forEach((card) => {
     card.addEventListener("click", () => {
-
-        serviceCards.forEach((otherCard) => {
-            if (otherCard !== card) {
-                otherCard.classList.remove("active");
-            }
-        });
-
         card.classList.toggle("active");
     });
 });
