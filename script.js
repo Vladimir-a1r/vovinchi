@@ -103,6 +103,7 @@ serviceCards.forEach((card) => {
         card.classList.toggle("active");
     });
 });
+
 const projectStar = document.querySelector(".project-star");
 
 projectStar.addEventListener("click", (event) => {
