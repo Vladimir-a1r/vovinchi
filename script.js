@@ -1,47 +1,20 @@
-// ==============================
-// BACK TO TOP
-// ==============================
-
-const backToTop = document.getElementById("backToTop");
+ const backToTop = document.getElementById("backToTop");
 
 if (backToTop) {
-
     window.addEventListener("scroll", () => {
-
         if (window.scrollY > 100) {
             backToTop.classList.add("show");
         } else {
             backToTop.classList.remove("show");
         }
-
     });
 
     backToTop.addEventListener("click", () => {
-
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
-
     });
-
-}
-
-    backToTop.addEventListener("pointerup", (event) => {
-
-        if (event.pointerType === "touch") {
-
-            event.preventDefault();
-
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "smooth"
-            });
-        }
-    });
-
-    updateBackToTop();
 }
 
 
@@ -52,14 +25,10 @@ if (backToTop) {
 const cursorGlow = document.getElementById("cursorGlow");
 
 if (cursorGlow) {
-
     document.addEventListener("mousemove", (event) => {
-
         cursorGlow.style.left = event.clientX + "px";
         cursorGlow.style.top = event.clientY + "px";
-
     });
-
 }
 
 
@@ -71,72 +40,22 @@ const aboutButton = document.getElementById("aboutButton");
 const aboutPanel = document.getElementById("aboutPanel");
 const closeAbout = document.getElementById("closeAbout");
 
-let aboutScrollPosition = 0;
 
-
-// OPEN ABOUT
-function openAbout() {
-
-    if (!aboutPanel) return;
-
-    aboutScrollPosition = window.scrollY;
-
-    document.body.classList.add("about-open");
-
-    aboutPanel.classList.add("active");
-
-}
-
-
-// CLOSE ABOUT
-function closeAboutPanel() {
-
-    if (!aboutPanel) return;
-
-    aboutPanel.classList.remove("active");
-
-    document.body.classList.remove("about-open");
-
-    window.scrollTo({
-        top: aboutScrollPosition,
-        left: 0,
-        behavior: "instant"
+if (aboutButton && aboutPanel) {
+    aboutButton.addEventListener("click", () => {
+        aboutPanel.classList.add("active");
     });
-
 }
 
 
-// ABOUT BUTTON
-if (aboutButton) {
-
-    aboutButton.addEventListener("click", (event) => {
-
-        event.stopPropagation();
-
-        openAbout();
-
+if (closeAbout && aboutPanel) {
+    closeAbout.addEventListener("click", () => {
+        aboutPanel.classList.remove("active");
     });
-
 }
 
 
-// CLOSE BUTTON
-if (closeAbout) {
-
-    closeAbout.addEventListener("click", (event) => {
-
-        event.stopPropagation();
-
-        closeAboutPanel();
-
-    });
-
-}
-
-
-// CLICK OUTSIDE
 document.addEventListener("click", (event) => {
-
     if (!aboutPanel || !aboutButton) return;
 
     if (
@@ -144,65 +63,57 @@ document.addEventListener("click", (event) => {
         !aboutPanel.contains(event.target) &&
         !aboutButton.contains(event.target)
     ) {
-
-        closeAboutPanel();
-
+        aboutPanel.classList.remove("active");
     }
-
 });
 
 
 // ==============================
-// ABOUT ME SWIPE LEFT
+// SWIPE LEFT TO CLOSE ABOUT ME
 // ==============================
-
-let swipeStartX = 0;
-let swipeStartY = 0;
 
 if (aboutPanel) {
 
-    aboutPanel.addEventListener("touchstart", (event) => {
+    let touchStartX = 0;
+    let touchStartY = 0;
 
-        const touch = event.changedTouches[0];
+    aboutPanel.addEventListener(
+        "touchstart",
+        (event) => {
 
-        swipeStartX = touch.clientX;
-        swipeStartY = touch.clientY;
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
 
-    }, {
-        passive: true
-    });
-
-
-    aboutPanel.addEventListener("touchend", (event) => {
-
-        const touch = event.changedTouches[0];
-
-        const swipeEndX = touch.clientX;
-        const swipeEndY = touch.clientY;
-
-        const distanceX = swipeEndX - swipeStartX;
-        const distanceY = swipeEndY - swipeStartY;
-
-        const horizontalSwipe =
-            Math.abs(distanceX) > Math.abs(distanceY);
-
-        const swipeLeft =
-            distanceX < -50;
+        },
+        { passive: true }
+    );
 
 
-        if (
-            horizontalSwipe &&
-            swipeLeft
-        ) {
+    aboutPanel.addEventListener(
+        "touchend",
+        (event) => {
 
-            closeAboutPanel();
+            const touchEndX = event.changedTouches[0].clientX;
+            const touchEndY = event.changedTouches[0].clientY;
 
-        }
+            const distanceX = touchEndX - touchStartX;
+            const distanceY = touchEndY - touchStartY;
 
-    }, {
-        passive: true
-    });
 
+            const isHorizontalSwipe =
+                Math.abs(distanceX) > Math.abs(distanceY);
+
+
+            const isSwipeLeft = distanceX < -60;
+
+
+            if (isHorizontalSwipe && isSwipeLeft) {
+                aboutPanel.classList.remove("active");
+            }
+
+        },
+        { passive: true }
+    );
 }
 
 
@@ -220,13 +131,9 @@ if (revealElements.length > 0) {
             entries.forEach((entry) => {
 
                 if (entry.isIntersecting) {
-
                     entry.target.classList.add("visible");
-
                 } else {
-
                     entry.target.classList.remove("visible");
-
                 }
 
             });
@@ -239,11 +146,8 @@ if (revealElements.length > 0) {
 
 
     revealElements.forEach((element) => {
-
         revealObserver.observe(element);
-
     });
-
 }
 
 
@@ -251,9 +155,7 @@ if (revealElements.length > 0) {
 // SHOOTING STARS
 // ==============================
 
-const shootingStars =
-    document.getElementById("shootingStars");
-
+const shootingStars = document.getElementById("shootingStars");
 
 function createShootingStar() {
 
@@ -263,8 +165,7 @@ function createShootingStar() {
 
     star.classList.add("shooting-star");
 
-    star.style.left =
-        Math.random() * 100 + "%";
+    star.style.left = Math.random() * 100 + "%";
 
     star.style.animationDuration =
         (1 + Math.random() * 1.5) + "s";
@@ -273,20 +174,15 @@ function createShootingStar() {
 
 
     setTimeout(() => {
-
         star.remove();
-
     }, 3000);
-
 }
 
 
 setInterval(() => {
 
     if (Math.random() > 0.35) {
-
         createShootingStar();
-
     }
 
 }, 2500);
@@ -296,17 +192,14 @@ setInterval(() => {
 // SERVICE CARDS
 // ==============================
 
-const serviceCards =
-    document.querySelectorAll(".service-card");
 
+const serviceCards = document.querySelectorAll(".service-card");
 
 serviceCards.forEach((card) => {
 
-    card.addEventListener("click", (event) => {
+    card.addEventListener("click", () => {
 
-        event.preventDefault();
-
-        card.classList.toggle("active");
+        card.classList.add("active");
 
     });
 
@@ -317,9 +210,7 @@ serviceCards.forEach((card) => {
 // PROJECT STAR
 // ==============================
 
-const projectStar =
-    document.querySelector(".project-star");
-
+const projectStar = document.querySelector(".project-star");
 
 if (projectStar) {
 
@@ -327,33 +218,25 @@ if (projectStar) {
 
         event.preventDefault();
 
-        const targetPage =
-            projectStar.href;
+        const targetPage = projectStar.href;
 
         projectStar.classList.add("redirecting");
 
 
         setTimeout(() => {
-
-            window.location.href =
-                targetPage;
-
+            window.location.href = targetPage;
         }, 1500);
 
     });
 
 
     window.addEventListener("pageshow", () => {
-
         projectStar.classList.remove("redirecting");
-
     });
 
 
     window.addEventListener("pagehide", () => {
-
         projectStar.classList.remove("redirecting");
-
     });
 
 }
