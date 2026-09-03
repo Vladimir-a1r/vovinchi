@@ -129,3 +129,11 @@ window.addEventListener("pageshow", () => {
         projectStar.classList.remove("redirecting");
     }
 });
+
+window.addEventListener("pagehide", () => {
+    const projectStar = document.querySelector(".project-star");
+
+    if (projectStar) {
+        projectStar.classList.remove("redirecting");
+    }
+});
