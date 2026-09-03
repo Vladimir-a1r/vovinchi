@@ -122,3 +122,10 @@ projectStar.addEventListener("click", (event) => {
         window.location.href = targetPage;
     }, 1500);
 });
+window.addEventListener("pageshow", () => {
+    const projectStar = document.querySelector(".project-star");
+
+    if (projectStar) {
+        projectStar.classList.remove("redirecting");
+    }
+});
