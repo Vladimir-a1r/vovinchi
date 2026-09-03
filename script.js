@@ -1,4 +1,4 @@
- // ==============================
+// ==============================
 // BACK TO TOP
 // ==============================
 
@@ -7,46 +7,29 @@ const backToTop = document.getElementById("backToTop");
 if (backToTop) {
 
     function updateBackToTop() {
+
         if (window.scrollY > 100) {
             backToTop.classList.add("show");
         } else {
             backToTop.classList.remove("show");
         }
-    }
 
+    }
     window.addEventListener("scroll", updateBackToTop, {
         passive: true
     });
 
-    backToTop.addEventListener("click", (event) => {
-        event.preventDefault();
+    backToTop.addEventListener("click", () => {
 
         window.scrollTo({
             top: 0,
-            left: 0,
             behavior: "smooth"
         });
-    });
 
-  
-    backToTop.addEventListener("pointerup", (event) => {
-
-        if (event.pointerType === "touch") {
-
-            event.preventDefault();
-
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: "smooth"
-            });
-        }
     });
 
     updateBackToTop();
 }
-
-
 // ==============================
 // CURSOR GLOW
 // ==============================
