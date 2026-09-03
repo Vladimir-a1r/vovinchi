@@ -8,7 +8,7 @@ if (backToTop) {
 
     function updateBackToTop() {
 
-        if (window.scrollY > 100) {
+        if (window.scrollY > 1) {
             backToTop.classList.add("show");
         } else {
             backToTop.classList.remove("show");
