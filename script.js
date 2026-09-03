@@ -95,7 +95,7 @@ setInterval(() => {
     }
 
 }, 2500);
-js
+
 const serviceCards = document.querySelectorAll(".service-card");
 
 serviceCards.forEach((card) => {
