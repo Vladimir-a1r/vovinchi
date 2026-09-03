@@ -155,7 +155,7 @@ document.addEventListener("click", (event) => {
 
 
 // ==============================
-// ABOUT ME — SWIPE LEFT
+// ABOUT ME SWIPE LEFT
 // ==============================
 
 let swipeStartX = 0;
@@ -292,29 +292,19 @@ setInterval(() => {
     }
 
 }, 2500);
-
-
 // ==============================
 // SERVICE CARDS
 // ==============================
 
-const serviceCards =
-    document.querySelectorAll(".service-card");
-
+const serviceCards = document.querySelectorAll(".service-card");
 
 serviceCards.forEach((card) => {
 
-    card.addEventListener("click", (event) => {
-
-        event.preventDefault();
-
+    card.addEventListener("click", () => {
         card.classList.toggle("active");
-
     });
 
 });
-
-
 // ==============================
 // PROJECT STAR
 // ==============================
