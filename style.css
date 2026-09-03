@@ -566,31 +566,41 @@ section > p {
     height: 50px;
 
     border: 1px solid #9d4edd;
-
     border-radius: 50%;
 
     background: #0a0a0a;
-
     color: #ffffff;
 
     font-size: 24px;
+    font-family: Arial, sans-serif;
 
     cursor: pointer;
 
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 
-    transition: 0.3s ease;
+    z-index: 1500;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 
     box-shadow:
         0 0 10px #9d4edd,
         0 0 25px #ff4fd8,
         0 0 40px #39ff14;
+
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 #backToTop.show {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 #backToTop:hover {
@@ -602,7 +612,42 @@ section > p {
         0 0 60px #39ff14;
 }
 
+/* =========================
+   MOBILE
+========================= */
 
+@media (max-width: 768px) {
+
+    #backToTop {
+        right: 20px;
+        bottom: 20px;
+
+        width: 48px;
+        height: 48px;
+
+        font-size: 22px;
+
+        z-index: 1500;
+        pointer-events: none;
+    }
+
+    #backToTop.show {
+        pointer-events: auto;
+    }
+
+    #backToTop:hover {
+        transform: none;
+    }
+
+    #backToTop:active {
+        transform: scale(0.92);
+
+        box-shadow:
+            0 0 15px #ff4fd8,
+            0 0 30px #9d4edd,
+            0 0 50px #39ff14;
+    }
+}
 /* =========================
    STATIC STARS
 ========================= */
