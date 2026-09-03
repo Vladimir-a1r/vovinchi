@@ -65,6 +65,22 @@ if (aboutButton && aboutPanel && closeAbout) {
 
 
     closeAbout.addEventListener("click", () => {
+        let touchStartX = 0;
+let touchEndX = 0;
+
+aboutPanel.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0].screenX;
+});
+
+aboutPanel.addEventListener("touchend", (event) => {
+    touchEndX = event.changedTouches[0].screenX;
+
+    const swipeDistance = touchEndX - touchStartX;
+
+    if (swipeDistance < -70) {
+        aboutPanel.classList.remove("active");
+    }
+});
 
         aboutPanel.classList.remove("active");
 
