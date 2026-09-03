@@ -1,63 +1,37 @@
  const backToTop = document.getElementById("backToTop");
 
-if (backToTop) {
-    window.addEventListener("scroll", () => {
-        if (window.scrollY > 100) {
-            backToTop.classList.add("show");
-        } else {
-            backToTop.classList.remove("show");
-        }
-    });
+ window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+        backToTop.classList.add("show");
+     } else {
+        backToTop.classList.remove("show");
+     }
+ });
 
-    backToTop.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-}
+ backToTop.addEventListener("click", () => {
+     window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+     });
+ });
+ const cursorGlow = document.getElementById("cursorGlow");
 
-
-// ==============================
-// CURSOR GLOW
-// ==============================
-
-const cursorGlow = document.getElementById("cursorGlow");
-
-if (cursorGlow) {
-    document.addEventListener("mousemove", (event) => {
-        cursorGlow.style.left = event.clientX + "px";
-        cursorGlow.style.top = event.clientY + "px";
-    });
-}
-
-
-// ==============================
-// ABOUT ME PANEL
-// ==============================
-
-const aboutButton = document.getElementById("aboutButton");
+ document.addEventListener("mousemove", (event) => {
+    cursorGlow.style.left = event.clientX + "px";
+    cursorGlow.style.top = event.clientY + "px";
+ });
+ const aboutButton = document.getElementById("aboutButton");
 const aboutPanel = document.getElementById("aboutPanel");
 const closeAbout = document.getElementById("closeAbout");
 
+aboutButton.addEventListener("click", () => {
+    aboutPanel.classList.add("active");
+});
 
-if (aboutButton && aboutPanel) {
-    aboutButton.addEventListener("click", () => {
-        aboutPanel.classList.add("active");
-    });
-}
-
-
-if (closeAbout && aboutPanel) {
-    closeAbout.addEventListener("click", () => {
-        aboutPanel.classList.remove("active");
-    });
-}
-
-
+closeAbout.addEventListener("click", () => {
+    aboutPanel.classList.remove("active");
+});
 document.addEventListener("click", (event) => {
-    if (!aboutPanel || !aboutButton) return;
-
     if (
         aboutPanel.classList.contains("active") &&
         !aboutPanel.contains(event.target) &&
@@ -66,100 +40,37 @@ document.addEventListener("click", (event) => {
         aboutPanel.classList.remove("active");
     }
 });
-
-
-// ==============================
-// SWIPE LEFT TO CLOSE ABOUT ME
-// ==============================
-
-if (aboutPanel) {
-
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    aboutPanel.addEventListener(
-        "touchstart",
-        (event) => {
-
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
-
-        },
-        { passive: true }
-    );
-
-
-    aboutPanel.addEventListener(
-        "touchend",
-        (event) => {
-
-            const touchEndX = event.changedTouches[0].clientX;
-            const touchEndY = event.changedTouches[0].clientY;
-
-            const distanceX = touchEndX - touchStartX;
-            const distanceY = touchEndY - touchStartY;
-
-
-            const isHorizontalSwipe =
-                Math.abs(distanceX) > Math.abs(distanceY);
-
-
-            const isSwipeLeft = distanceX < -60;
-
-
-            if (isHorizontalSwipe && isSwipeLeft) {
-                aboutPanel.classList.remove("active");
-            }
-
-        },
-        { passive: true }
-    );
-}
-
-
-// ==============================
-// REVEAL ANIMATION
-// ==============================
-
 const revealElements = document.querySelectorAll(".reveal");
 
-if (revealElements.length > 0) {
+const revealObserver = new IntersectionObserver(
+    (entries) => {
 
-    const revealObserver = new IntersectionObserver(
-        (entries) => {
+        entries.forEach((entry) => {
 
-            entries.forEach((entry) => {
+            if (entry.isIntersecting) {
 
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                } else {
-                    entry.target.classList.remove("visible");
-                }
+                entry.target.classList.add("visible");
 
-            });
+            } else {
 
-        },
-        {
-            threshold: 0.15
-        }
-    );
+                entry.target.classList.remove("visible");
 
+            }
 
-    revealElements.forEach((element) => {
-        revealObserver.observe(element);
-    });
-}
+        });
 
+    },
+    {
+        threshold: 0.15
+    }
+);
 
-// ==============================
-// SHOOTING STARS
-// ==============================
-
+revealElements.forEach((element) => {
+    revealObserver.observe(element);
+});
 const shootingStars = document.getElementById("shootingStars");
 
 function createShootingStar() {
-
-    if (!shootingStars) return;
 
     const star = document.createElement("div");
 
@@ -172,12 +83,10 @@ function createShootingStar() {
 
     shootingStars.appendChild(star);
 
-
     setTimeout(() => {
         star.remove();
     }, 3000);
 }
-
 
 setInterval(() => {
 
@@ -186,57 +95,30 @@ setInterval(() => {
     }
 
 }, 2500);
-
-
-// ==============================
-// SERVICE CARDS
-// ==============================
-
-
 const serviceCards = document.querySelectorAll(".service-card");
 
 serviceCards.forEach((card) => {
-
     card.addEventListener("click", () => {
 
-        card.classList.add("active");
+        serviceCards.forEach((otherCard) => {
+            if (otherCard !== card) {
+                otherCard.classList.remove("active");
+            }
+        });
 
+        card.classList.toggle("active");
     });
-
 });
-
-
-// ==============================
-// PROJECT STAR
-// ==============================
-
 const projectStar = document.querySelector(".project-star");
 
-if (projectStar) {
+projectStar.addEventListener("click", (event) => {
+    event.preventDefault();
 
-    projectStar.addEventListener("click", (event) => {
+    const targetPage = projectStar.href;
 
-        event.preventDefault();
+    projectStar.classList.add("redirecting");
 
-        const targetPage = projectStar.href;
-
-        projectStar.classList.add("redirecting");
-
-
-        setTimeout(() => {
-            window.location.href = targetPage;
-        }, 1500);
-
-    });
-
-
-    window.addEventListener("pageshow", () => {
-        projectStar.classList.remove("redirecting");
-    });
-
-
-    window.addEventListener("pagehide", () => {
-        projectStar.classList.remove("redirecting");
-    });
-
-}
+    setTimeout(() => {
+        window.location.href = targetPage;
+    }, 1500);
+});

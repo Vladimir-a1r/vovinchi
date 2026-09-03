@@ -1,373 +1,187 @@
  <!DOCTYPE html>
-<html lang="en">
-
-<head>
+ <html lang="en">
+ <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Vovinchi - Web Development</title>
 
     <link rel="stylesheet" href="style.css">
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-
-<body>
-
-    <!-- =========================
-         ABOUT PANEL
-    ========================== -->
-
+ <body>
     <div id="aboutPanel">
 
-        <button id="closeAbout" type="button" aria-label="Close About Me">
-            ×
-        </button>
+    <button id="closeAbout">×</button>
 
-        <h2>ABOUT ME</h2>
+    <h2>ABOUT ME</h2>
 
-        <p>
-            My name is Vladimir, I create modern websites for people and businesses.
-        </p>
+    <p>
+        My name is Vladimir, I create modern websites for people and businesses.
+    </p>
 
-        <p>
-            I focus on clean design, smooth animations
-            and interactive user experiences.
-        </p>
+    <p>
+        I focus on clean design, smooth animations
+        and interactive user experiences.
+    </p>
 
-        <div class="about-panel-skills">
-            <span>WEB DEVELOPMENT</span>
-            <span>UI / UX DESIGN</span>
-            <span>RESPONSIVE DESIGN</span>
-        </div>
-
+    <div class="about-panel-skills">
+        <span>WEB DEVELOPMENT</span>
+        <span>UI / UX DESIGN</span>
+        <span>RESPONSIVE DESIGN</span>
     </div>
 
-
-    <!-- =========================
-         BACKGROUND EFFECTS
-    ========================== -->
-
-    <div id="shootingStars"></div>
-    <div id="cursorGlow"></div>
-
-
-    <!-- =========================
-         BACK TO TOP
-    ========================== -->
-
-    <button id="backToTop" type="button" aria-label="Back to top">
-        ↑
-    </button>
-
-
-    <!-- =========================
-         HEADER
-    ========================== -->
-
-    <header>
-
-        <button
-            id="aboutButton"
-            type="button"
-            aria-label="Open About Me"
-        >
-            ABOUT ME
-        </button>
-
-        <nav>
-            <a href="#works">WORKS</a>
-            <a href="#services">SERVICES</a>
-            <a href="#contact">CONTACT</a>
-        </nav>
-
-    </header>
-
-
-    <!-- =========================
-         MAIN
-    ========================== -->
-
-    <main>
-
-        <!-- HERO -->
-
-        <section id="hero">
-
-            <h2>Vladimir Biletskyi</h2>
-
-            <a href="#works">
-                View My Portfolio
-            </a>
-
-        </section>
-
-
-        <!-- =========================
-             WORKS
-        ========================== -->
-
-        <section id="works" class="reveal">
-
-            <h2>WORKS</h2>
-
-            <p>My Projects</p>
-
-
-            <div class="star-project">
-
-                <div class="star-project-info">
-
-                    <h3>PERSONAL WEBSITE</h3>
-
-                    <p>
-                        My First Web Development Project
-                    </p>
-
-                </div>
-
-
-                <div class="star-project-action">
-
-                    <a
-                        href="projects/project1.html"
-                        class="project-star"
-                        aria-label="Open Personal Website project"
-                    >
-                        <span class="star-core">✦</span>
-                    </a>
-
-                    <span class="star-hint">
-                        Click on the star to see more
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SERVICES
-        ========================== -->
-
-        <section id="services" class="reveal">
-
-            <h2>SERVICES</h2>
-
-            <p>What Can I Do?</p>
-
-
-            <div class="services-grid">
-
-
-                <!-- SERVICE 1 -->
-
-                <div class="service-card">
-
-                    <div class="service-title">
-
-                        <h3>LANDING PAGES</h3>
-
-                        <span class="service-toggle">
-                            +
-                        </span>
-
-                    </div>
-
-                    <div class="service-description">
-
-                        <p>
-                            Modern landing pages for products,
-                            brands and personal projects.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SERVICE 2 -->
-
-                <div class="service-card">
-
-                    <div class="service-title">
-
-                        <h3>BUSINESS WEBSITES</h3>
-
-                        <span class="service-toggle">
-                            +
-                        </span>
-
-                    </div>
-
-                    <div class="service-description">
-
-                        <p>
-                            Professional websites for businesses,
-                            brands and personal projects.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SERVICE 3 -->
-
-                <div class="service-card">
-
-                    <div class="service-title">
-
-                        <h3>PORTFOLIO WEBSITES</h3>
-
-                        <span class="service-toggle">
-                            +
-                        </span>
-
-                    </div>
-
-                    <div class="service-description">
-
-                        <p>
-                            Unique portfolio websites that showcase
-                            your work and skills.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             CONTACT
-        ========================== -->
-
-        <section id="contact" class="reveal">
-
-            <h2>CONTACT</h2>
-
-            <p>
-                Have A Project In Mind?
-                Let's Work Together.
-            </p>
-
-
-            <div class="contact-links">
-
-                <a
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <i class="fa-brands fa-instagram"></i>
-                    <span>INSTAGRAM</span>
-                </a>
-
-
-                <a
-                    href="https://web.telegram.org/k/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <i class="fa-brands fa-telegram"></i>
-                    <span>TELEGRAM</span>
-                </a>
-
-
-                <a
-                    href="https://discord.com/channels/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <i class="fa-brands fa-discord"></i>
-                    <span>DISCORD</span>
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div class="footer-content">
-
-            <div class="footer-name">
-
-                <h3>
-                    Vladimir Biletskyi
-                </h3>
-
-                <p>
-                    WEB DEVELOPER
-                </p>
-
-            </div>
-
-
-            <div class="footer-socials">
-
-                <a
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                >
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-
-
-                <a
-                    href="https://web.telegram.org/k/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Telegram"
-                >
-                    <i class="fa-brands fa-telegram"></i>
-                </a>
-
-
-                <a
-                    href="https://discord.com/channels/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Discord"
-                >
-                    <i class="fa-brands fa-discord"></i>
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-line"></div>
-
-
-        <p class="copyright">
-            © 2026 Vladimir Biletskyi. All Rights Reserved.
+</div>
+<div id="shootingStars"></div>
+ <div id="cursorGlow"></div>   
+ 
+ <button id="backToTop">↑</button>
+ 
+ <header>
+      <button id="aboutButton">ABOUT ME</button>
+      <nav>
+      <a href="#works">WORKS</a>
+      <a href="#services">SERVICES</a>
+      <a href="#contact">CONTACT</a>
+      </nav>
+ </header>
+     <main>
+     <section id="hero">
+         <h2>Vladimir Biletskyi</h2>
+         <a href="#works">View My Portfolio</a>
+     </section>
+
+ <section id="works" class="reveal"> <h2>WORKS</h2> <p>My Projects</p>
+
+<div class="star-project">
+
+    <div class="star-project-info">
+        <h3>PERSONAL WEBSITE</h3>
+        <p>My First Web Development Project</p>
+    </div>
+
+    <div class="star-project-action">
+        <a href="projects\project1.html"
+           class="project-star"
+           aria-label="Open Personal Website project">
+            <span class="star-core">✦</span>
+        </a>
+
+        <span class="star-hint">Click on the star to see more</span>
+    </div>
+
+</div>
+
+</section>
+     <section id="services" class="reveal">
+    <h2>SERVICES</h2>
+    <p>What Can I Do?</p>
+    <div class="services-grid">
+       <div class="service-card">
+
+    <div class="service-title">
+        <h3>LANDING PAGES</h3>
+        <span class="service-toggle">+</span>
+    </div>
+
+    <div class="service-description">
+        <p>
+            Modern landing pages for products,
+            brands and personal projects.
         </p>
+    </div>
+</div>
+        <div class="service-card">
 
-    </footer>
+    <div class="service-title">
+        <h3>BUSINESS WEBSITES</h3>
+        <span class="service-toggle">+</span>
+    </div>
 
+    <div class="service-description">
+        <p>
+           Professional websites for businesses,
+           brands and personal projects.
+        </p>
+    </div>
+</div>
+ <div class="service-card">
 
-    <script src="script.js"></script>
+    <div class="service-title">
+        <h3>PORTFOLIO WEBSITES</h3>
+        <span class="service-toggle">+</span>
+    </div>
 
-</body>
+    <div class="service-description">
+        <p>
+           Unique portfolio websites that showcase
+           your work and skills.
+        </p>
+    </div>
+</div>
+       
+</section>
+    <section id="contact" class="reveal">
+    <h2>CONTACT</h2>
+    <p>
+        Have A Project In Mind?
+        Let's Work Together.
+    </p>
+    <div class="contact-links">
+        <a href="https://www.instagram.com/"
+           target="_blank"
+           rel="noopener noreferrer">
+            <i class="fa-brands fa-instagram"></i>
+            <span>INSTAGRAM</span>
+        </a>
+        <a href="https://web.telegram.org/k/"
+           target="_blank"
+           rel="noopener noreferrer">
+            <i class="fa-brands fa-telegram"></i>
+            <span>TELEGRAM</span>
+        </a>
+        <a href="https://discord.com/channels/"
+           target="_blank"
+           rel="noopener noreferrer">
+            <i class="fa-brands fa-discord"></i>
+            <span>DISCORD</span>
+        </a>
+    </div>
+</section>
+     </main>
+ <footer>
 
-</html>
+     <div class="footer-content">
+
+         <div class="footer-name">
+             <h3>Vladimir Biletskyi</h3>
+             <p>WEB DEVELOPER</p>
+         </div>
+
+         <div class="footer-socials">
+
+             <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+             </a>
+
+             <a href="https://web.telegram.org/k/" target="_blank" aria-label="Telegram">
+                <i class="fa-brands fa-telegram"></i>
+             </a>
+
+             <a href="https://discord.com/channels/" target="_blank" aria-label="Discord">
+                <i class="fa-brands fa-discord"></i>
+             </a>
+
+         </div>
+
+     </div>
+
+     <div class="footer-line"></div>
+
+     <p class="copyright">
+        © 2026 Vladimir Biletskyi. All Rights Reserved.
+     </p>
+ </footer>
+ <script src="script.js"></script>
+ </body>
+ </html>

@@ -1,52 +1,39 @@
-/* ========================= 
-   BACK TO TOP 
-========================= */ 
- 
-#backToTop { 
-    position: fixed; 
- 
-    right: 30px; 
-    bottom: 30px; 
- 
-    width: 50px; 
-    height: 50px; 
- 
-    border: 1px solid #9d4edd; 
- 
-    border-radius: 50%; 
- 
-    background: #0a0a0a; 
- 
-    color: #ffffff; 
- 
-    font-size: 24px; 
- 
-    cursor: pointer; 
- 
-    opacity: 0; 
-    visibility: hidden; 
- 
-    transition: 0.3s ease; 
- 
-    box-shadow: 
-        0 0 10px #9d4edd, 
-        0 0 25px #ff4fd8, 
-        0 0 40px #39ff14; 
-} 
- 
-#backToTop.show { 
-    opacity: 1; 
-    visibility: visible; 
-} 
- 
-#backToTop:hover { 
-    transform: translateY(-5px) scale(1.1); 
- 
-    box-shadow: 
-        0 0 15px #ff4fd8, 
-        0 0 35px #9d4edd, 
-        0 0 60px #39ff14; 
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(157, 78, 221, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(57, 255, 20, 0.10),
+            transparent 30%
+        ),
+        #010101;
+
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+
+    cursor: default;
+    user-select: none;
+}
+
 
 /* =========================
    HEADER
@@ -59,8 +46,6 @@ header {
     left: 0;
 
     width: 100%;
-
-    min-height: 80px;
 
     display: flex;
     justify-content: space-between;
@@ -81,13 +66,6 @@ header {
 ========================= */
 
 #aboutButton {
-    display: flex;
-    align-items: center;
-
-    height: 40px;
-
-    padding: 0;
-
     border: none;
 
     background: transparent;
@@ -117,20 +95,8 @@ header {
    NAVIGATION
 ========================= */
 
-nav {
-    display: flex;
-    align-items: center;
-
-    height: 40px;
-}
-
 nav a {
     position: relative;
-
-    display: flex;
-    align-items: center;
-
-    height: 40px;
 
     margin-left: 30px;
 
@@ -300,7 +266,6 @@ section > p {
 ========================= */
 
 @keyframes gradientMove {
-
     0% {
         background-position: 0% center;
     }
@@ -354,13 +319,10 @@ section > p {
     cursor: pointer;
 
     transition:
-        transform 0.4s ease,
-        border-color 0.4s ease,
-        box-shadow 0.4s ease;
+        transform 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
 }
-
-
-/* MOVING LIGHT LINE */
 
 .service-card::before {
     content: "";
@@ -389,8 +351,15 @@ section > p {
     left: 100%;
 }
 
+.service-number {
+    color: #39ff14;
 
-/* SERVICE TITLE */
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    text-shadow: 0 0 10px #39ff14;
+}
 
 .service-title {
     display: flex;
@@ -407,27 +376,15 @@ section > p {
     font-size: 24px;
 }
 
-
-/* PLUS */
-
 .service-toggle {
-    flex-shrink: 0;
-
     font-size: 26px;
 
     color: #39ff14;
 
-    text-shadow:
-        0 0 10px #39ff14;
+    text-shadow: 0 0 10px #39ff14;
 
-    transition:
-        transform 0.4s ease,
-        color 0.4s ease,
-        text-shadow 0.4s ease;
+    transition: transform 0.4s ease;
 }
-
-
-/* DESCRIPTION */
 
 .service-description {
     max-height: 0;
@@ -450,9 +407,7 @@ section > p {
 }
 
 
-/* =========================
-   OPEN SERVICE CARD
-========================= */
+/* OPEN CARD */
 
 .service-card.active .service-description {
     max-height: 150px;
@@ -462,21 +417,14 @@ section > p {
 
 .service-card.active .service-toggle {
     transform: rotate(45deg);
-
-    color: #39ff14;
-
-    text-shadow:
-        0 0 10px #39ff14,
-        0 0 20px #39ff14;
 }
 
 .service-card.active {
     border-color: #39ff14;
 
     box-shadow:
-        0 0 10px #9d4edd,
-        0 0 25px #39ff14,
-        0 0 45px rgba(255, 79, 216, 0.25);
+        0 0 15px rgba(57, 255, 20, 0.35),
+        0 0 35px rgba(157, 78, 221, 0.25);
 }
 
 
@@ -487,25 +435,19 @@ section > p {
 @media (min-width: 769px) {
 
     .service-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px);
 
-        border-color: #39ff14;
+        border-color: #9d4edd;
 
         box-shadow:
-            0 0 10px #9d4edd,
-            0 0 25px #39ff14,
-            0 0 45px rgba(255, 79, 216, 0.20);
+            0 0 15px rgba(157, 78, 221, 0.5),
+            0 0 35px rgba(255, 79, 216, 0.2);
     }
 
-    .service-card.active:hover {
-        transform: translateY(-5px);
-
-        border-color: #39ff14;
-
-        box-shadow:
-            0 0 15px #9d4edd,
-            0 0 30px #39ff14,
-            0 0 55px rgba(255, 79, 216, 0.30);
+    .service-card:hover .service-number {
+        text-shadow:
+            0 0 10px #39ff14,
+            0 0 20px #39ff14;
     }
 }
 
@@ -583,41 +525,31 @@ section > p {
     height: 50px;
 
     border: 1px solid #9d4edd;
+
     border-radius: 50%;
 
     background: #0a0a0a;
+
     color: #ffffff;
 
     font-size: 24px;
-    font-family: Arial, sans-serif;
 
     cursor: pointer;
 
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
 
-    z-index: 1500;
-
-    transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease,
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    transition: 0.3s ease;
 
     box-shadow:
         0 0 10px #9d4edd,
         0 0 25px #ff4fd8,
         0 0 40px #39ff14;
-
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
 }
 
 #backToTop.show {
     opacity: 1;
     visibility: visible;
-    pointer-events: auto;
 }
 
 #backToTop:hover {
@@ -629,42 +561,7 @@ section > p {
         0 0 60px #39ff14;
 }
 
-/* =========================
-   MOBILE
-========================= */
 
-@media (max-width: 768px) {
-
-    #backToTop {
-        right: 20px;
-        bottom: 20px;
-
-        width: 48px;
-        height: 48px;
-
-        font-size: 22px;
-
-        z-index: 1500;
-        pointer-events: none;
-    }
-
-    #backToTop.show {
-        pointer-events: auto;
-    }
-
-    #backToTop:hover {
-        transform: none;
-    }
-
-    #backToTop:active {
-        transform: scale(0.92);
-
-        box-shadow:
-            0 0 15px #ff4fd8,
-            0 0 30px #9d4edd,
-            0 0 50px #39ff14;
-    }
-}
 /* =========================
    STATIC STARS
 ========================= */
@@ -1434,8 +1331,6 @@ footer {
     /* HEADER */
 
     header {
-        min-height: auto;
-
         padding: 15px 20px;
 
         flex-direction: column;
@@ -1451,8 +1346,6 @@ footer {
         justify-content: center;
 
         gap: 18px;
-
-        height: auto;
     }
 
     header nav a,
@@ -1460,12 +1353,6 @@ footer {
         font-size: 12px;
 
         letter-spacing: 1.5px;
-    }
-
-    nav a {
-        margin-left: 0;
-
-        height: 25px;
     }
 
 
@@ -1569,29 +1456,15 @@ footer {
 
         padding: 28px 25px;
 
-        transition:
-            transform 0.3s ease,
-            border-color 0.3s ease,
-            box-shadow 0.3s ease;
+        animation: mobileServiceGlow 4s ease-in-out infinite;
     }
 
-    .service-card:active {
-        transform: scale(0.99);
-
-        border-color: #39ff14;
-
-        box-shadow:
-            0 0 10px #9d4edd,
-            0 0 25px #39ff14;
+    .service-card:nth-child(2) {
+        animation-delay: 1.3s;
     }
 
-    .service-card.active {
-        border-color: #39ff14;
-
-        box-shadow:
-            0 0 10px #9d4edd,
-            0 0 25px #39ff14,
-            0 0 45px rgba(255, 79, 216, 0.25);
+    .service-card:nth-child(3) {
+        animation-delay: 2.6s;
     }
 
     .service-card h3 {
@@ -1721,6 +1594,29 @@ footer {
 
 
 /* =========================
+   MOBILE SERVICE GLOW
+========================= */
+
+@keyframes mobileServiceGlow {
+
+    0%, 100% {
+        border-color: #832194;
+
+        box-shadow:
+            0 0 0 rgba(157, 78, 221, 0);
+    }
+
+    50% {
+        border-color: #9d4edd;
+
+        box-shadow:
+            0 0 12px rgba(157, 78, 221, 0.4),
+            0 0 25px rgba(255, 79, 216, 0.15);
+    }
+}
+
+
+/* =========================
    MOBILE STAR GLOW
 ========================= */
 
@@ -1761,5 +1657,41 @@ footer {
         box-shadow:
             0 0 10px #9d4edd,
             0 0 25px rgba(57, 255, 20, 0.35);
+    }
+}
+#crystalCursor {
+    position: fixed;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%) rotate(45deg);
+
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        0 0 6px rgba(255, 255, 255, 0.9),
+        0 0 15px rgba(157, 78, 221, 0.8),
+        0 0 25px rgba(255, 79, 216, 0.5);
+
+    backdrop-filter: blur(2px);
+
+    transition:
+        width 0.2s ease,
+        height 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#crystalCursor::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 768px) {
+    #crystalCursor {
+        display: none;
     }
 }
