@@ -1,7 +1,3 @@
-// ==============================
-// BACK TO TOP
-// ==============================
-
 const backToTop = document.getElementById("backToTop");
 
 if (backToTop) {
@@ -252,7 +248,7 @@ function createShootingStar() {
         Math.random() * 100 + "%";
 
     star.style.animationDuration =
-        (1 + Math.random() * 1.5) + "s";
+        (1 + Math.random() * 1) + "s";
 
     shootingStars.appendChild(star);
 
