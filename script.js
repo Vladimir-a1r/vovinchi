@@ -2,7 +2,8 @@
    BACK TO TOP
 ======================================== */
 
-const backToTop = document.getElementById("backToTop");
+const backToTop =
+    document.getElementById("backToTop");
 
 if (backToTop) {
 
@@ -15,6 +16,7 @@ if (backToTop) {
         }
 
     });
+
 
     backToTop.addEventListener("click", () => {
 
@@ -32,19 +34,23 @@ if (backToTop) {
    CURSOR GLOW
 ======================================== */
 
-const cursorGlow = document.getElementById("cursorGlow");
+const cursorGlow =
+    document.getElementById("cursorGlow");
 
 if (cursorGlow) {
 
-    document.addEventListener("mousemove", (event) => {
+    document.addEventListener(
+        "mousemove",
+        (event) => {
 
-        cursorGlow.style.left =
-            event.clientX + "px";
+            cursorGlow.style.left =
+                event.clientX + "px";
 
-        cursorGlow.style.top =
-            event.clientY + "px";
+            cursorGlow.style.top =
+                event.clientY + "px";
 
-    });
+        }
+    );
 
 }
 
@@ -65,45 +71,56 @@ const closeAbout =
 
 if (aboutButton && aboutPanel) {
 
-    aboutButton.addEventListener("click", () => {
+    aboutButton.addEventListener(
+        "click",
+        () => {
 
-        aboutPanel.classList.add("active");
+            aboutPanel.classList.add("active");
 
-    });
+        }
+    );
 
 }
 
 
 if (closeAbout && aboutPanel) {
 
-    closeAbout.addEventListener("click", () => {
+    closeAbout.addEventListener(
+        "click",
+        () => {
 
-        aboutPanel.classList.remove("active");
+            aboutPanel.classList.remove("active");
 
-    });
+        }
+    );
 
 }
 
 
-document.addEventListener("click", (event) => {
+/* CLOSE WHEN CLICKING OUTSIDE */
 
-    if (
-        aboutPanel &&
-        aboutButton &&
-        aboutPanel.classList.contains("active") &&
-        !aboutPanel.contains(event.target) &&
-        !aboutButton.contains(event.target)
-    ) {
+document.addEventListener(
+    "click",
+    (event) => {
 
-        aboutPanel.classList.remove("active");
+        if (
+            aboutPanel &&
+            aboutButton &&
+            aboutPanel.classList.contains("active") &&
+            !aboutPanel.contains(event.target) &&
+            !aboutButton.contains(event.target)
+        ) {
+
+            aboutPanel.classList.remove("active");
+
+        }
 
     }
-
-});
+);
 
 
 /* ========================================
-   ABOUT PHOTO GALLERY
+   PHOTO GALLERY
 ======================================== */
 
 const gallery =
@@ -118,105 +135,142 @@ const dots =
 
 let currentPhoto = 0;
 
-let galleryInterval;
+let galleryInterval = null;
 
 
 /* SHOW PHOTO */
 
 function showPhoto(index) {
 
-    if (!photos.length) return;
+    if (!photos.length) {
+        return;
+    }
+
 
     if (index >= photos.length) {
+
         currentPhoto = 0;
-    }
 
-    else if (index < 0) {
-        currentPhoto = photos.length - 1;
-    }
+    } else if (index < 0) {
 
-    else {
+        currentPhoto =
+            photos.length - 1;
+
+    } else {
+
         currentPhoto = index;
+
     }
 
 
-    photos.forEach((photo, i) => {
+    photos.forEach(
+        (photo, i) => {
 
-        photo.classList.toggle(
-            "active",
-            i === currentPhoto
-        );
+            photo.classList.toggle(
+                "active",
+                i === currentPhoto
+            );
 
-    });
+        }
+    );
 
 
-    dots.forEach((dot, i) => {
+    dots.forEach(
+        (dot, i) => {
 
-        dot.classList.toggle(
-            "active",
-            i === currentPhoto
-        );
+            dot.classList.toggle(
+                "active",
+                i === currentPhoto
+            );
 
-    });
+        }
+    );
 
 }
 
 
-/* NEXT PHOTO */
+/* NEXT */
 
 function nextPhoto() {
 
-    showPhoto(currentPhoto + 1);
+    showPhoto(
+        currentPhoto + 1
+    );
 
 }
 
 
-/* PREVIOUS PHOTO */
+/* PREVIOUS */
 
 function previousPhoto() {
 
-    showPhoto(currentPhoto - 1);
+    showPhoto(
+        currentPhoto - 1
+    );
 
 }
 
 
-/* AUTO SLIDER */
+/* ========================================
+   AUTO SLIDER
+======================================== */
 
 function startGallery() {
 
-    if (photos.length <= 1) return;
+    if (photos.length <= 1) {
+        return;
+    }
 
-    galleryInterval = setInterval(() => {
 
-        nextPhoto();
+    clearInterval(galleryInterval);
 
-    }, 4000);
+
+    galleryInterval =
+        setInterval(
+            () => {
+
+                nextPhoto();
+
+            },
+            4000
+        );
 
 }
 
 
+/* RESTART AFTER MANUAL SWIPE */
+
 function restartGallery() {
 
-    clearInterval(galleryInterval);
+    clearInterval(
+        galleryInterval
+    );
 
     startGallery();
 
 }
 
 
-/* DOT CLICK */
+/* ========================================
+   DOTS
+======================================== */
 
-dots.forEach((dot, index) => {
+dots.forEach(
+    (dot, index) => {
 
-    dot.addEventListener("click", () => {
+        dot.addEventListener(
+            "click",
+            () => {
 
-        showPhoto(index);
+                showPhoto(index);
 
-        restartGallery();
+                restartGallery();
 
-    });
+            }
+        );
 
-});
+    }
+);
 
 
 /* ========================================
@@ -225,7 +279,7 @@ dots.forEach((dot, index) => {
 
 let touchStartX = 0;
 
-let touchEndX = 0;
+let touchStartY = 0;
 
 
 if (gallery) {
@@ -237,8 +291,13 @@ if (gallery) {
             touchStartX =
                 event.changedTouches[0].screenX;
 
+            touchStartY =
+                event.changedTouches[0].screenY;
+
         },
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
 
@@ -246,16 +305,37 @@ if (gallery) {
         "touchend",
         (event) => {
 
-            touchEndX =
+            const touchEndX =
                 event.changedTouches[0].screenX;
 
-            const swipeDistance =
+            const touchEndY =
+                event.changedTouches[0].screenY;
+
+
+            const diffX =
                 touchEndX - touchStartX;
+
+            const diffY =
+                touchEndY - touchStartY;
+
+
+            /*
+                Игнорируем вертикальный скролл.
+            */
+
+            if (
+                Math.abs(diffX) <=
+                Math.abs(diffY)
+            ) {
+
+                return;
+
+            }
 
 
             /* SWIPE LEFT */
 
-            if (swipeDistance < -50) {
+            if (diffX < -50) {
 
                 nextPhoto();
 
@@ -266,7 +346,7 @@ if (gallery) {
 
             /* SWIPE RIGHT */
 
-            if (swipeDistance > 50) {
+            if (diffX > 50) {
 
                 previousPhoto();
 
@@ -275,13 +355,15 @@ if (gallery) {
             }
 
         },
-        { passive: true }
+        {
+            passive: true
+        }
     );
 
 }
 
 
-/* START */
+/* START GALLERY */
 
 showPhoto(0);
 
@@ -289,36 +371,43 @@ startGallery();
 
 
 /* ========================================
-   REVEAL ANIMATION
+   SCROLL REVEAL
 ======================================== */
 
 const revealElements =
     document.querySelectorAll(".reveal");
 
 
-if ("IntersectionObserver" in window) {
+if (
+    "IntersectionObserver"
+    in window
+) {
 
     const revealObserver =
         new IntersectionObserver(
             (entries) => {
 
-                entries.forEach((entry) => {
+                entries.forEach(
+                    (entry) => {
 
-                    if (entry.isIntersecting) {
+                        if (
+                            entry.isIntersecting
+                        ) {
 
-                        entry.target.classList.add(
-                            "visible"
-                        );
+                            entry.target.classList.add(
+                                "visible"
+                            );
 
-                    } else {
+                        } else {
 
-                        entry.target.classList.remove(
-                            "visible"
-                        );
+                            entry.target.classList.remove(
+                                "visible"
+                            );
+
+                        }
 
                     }
-
-                });
+                );
 
             },
             {
@@ -327,11 +416,15 @@ if ("IntersectionObserver" in window) {
         );
 
 
-    revealElements.forEach((element) => {
+    revealElements.forEach(
+        (element) => {
 
-        revealObserver.observe(element);
+            revealObserver.observe(
+                element
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -341,12 +434,16 @@ if ("IntersectionObserver" in window) {
 ======================================== */
 
 const shootingStars =
-    document.getElementById("shootingStars");
+    document.getElementById(
+        "shootingStars"
+    );
 
 
 function createShootingStar() {
 
-    if (!shootingStars) return;
+    if (!shootingStars) {
+        return;
+    }
 
 
     const star =
@@ -366,27 +463,37 @@ function createShootingStar() {
         (1 + Math.random() * 1.5) + "s";
 
 
-    shootingStars.appendChild(star);
+    shootingStars.appendChild(
+        star
+    );
 
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        star.remove();
+            star.remove();
 
-    }, 3000);
+        },
+        3000
+    );
 
 }
 
 
-setInterval(() => {
+setInterval(
+    () => {
 
-    if (Math.random() > 0.35) {
+        if (
+            Math.random() > 0.35
+        ) {
 
-        createShootingStar();
+            createShootingStar();
 
-    }
+        }
 
-}, 2500);
+    },
+    2500
+);
 
 
 /* ========================================
@@ -394,18 +501,27 @@ setInterval(() => {
 ======================================== */
 
 const serviceCards =
-    document.querySelectorAll(".service-card");
+    document.querySelectorAll(
+        ".service-card"
+    );
 
 
-serviceCards.forEach((card) => {
+serviceCards.forEach(
+    (card) => {
 
-    card.addEventListener("click", () => {
+        card.addEventListener(
+            "click",
+            () => {
 
-        card.classList.toggle("active");
+                card.classList.toggle(
+                    "active"
+                );
 
-    });
+            }
+        );
 
-});
+    }
+);
 
 
 /* ========================================
@@ -413,7 +529,9 @@ serviceCards.forEach((card) => {
 ======================================== */
 
 const projectStar =
-    document.querySelector(".project-star");
+    document.querySelector(
+        ".project-star"
+    );
 
 
 if (projectStar) {
@@ -443,25 +561,28 @@ if (projectStar) {
             );
 
 
-            setTimeout(() => {
+            setTimeout(
+                () => {
 
-                window.location.href =
-                    targetPage;
+                    window.location.href =
+                        targetPage;
 
-            }, 1500);
+                },
+                1500
+            );
 
         }
     );
 
+    window.addEventListener(
+        "pageshow",
+        () => {
 
-    /* FIX AFTER BACK BUTTON */
+            projectStar.classList.remove(
+                "redirecting"
+            );
 
-    window.addEventListener("pageshow", () => {
-
-        projectStar.classList.remove(
-            "redirecting"
-        );
-
-    });
+        }
+    );
 
 }

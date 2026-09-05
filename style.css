@@ -2829,3 +2829,761 @@ footer {
     }
 
 }
+/* =====================================================
+   FINAL ABOUT PANEL FIX
+===================================================== */
+
+#aboutPanel {
+
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+
+    width: clamp(320px, 25vw, 430px);
+    height: calc(100vh - 40px);
+
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 3, 22, 0.98),
+            rgba(2, 2, 2, 0.99)
+        );
+
+    border: 1px solid rgba(157, 78, 221, 0.9);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 15px rgba(157, 78, 221, 0.45),
+        0 0 40px rgba(255, 79, 216, 0.18),
+        inset 0 0 30px rgba(157, 78, 221, 0.08);
+
+    transform: translateX(calc(-100% - 40px));
+
+    transition:
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
+
+    z-index: 2000;
+
+    pointer-events: none;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* УБИРАЕМ СЕРЫЙ SCROLLBAR */
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#aboutPanel::-webkit-scrollbar {
+    display: none;
+}
+
+
+#aboutPanel.active {
+
+    transform: translateX(0);
+
+    pointer-events: auto;
+
+    box-shadow:
+        0 0 20px rgba(157, 78, 221, 0.55),
+        0 0 50px rgba(255, 79, 216, 0.2),
+        0 0 90px rgba(57, 255, 20, 0.08),
+        inset 0 0 30px rgba(157, 78, 221, 0.1);
+}
+
+
+/* =====================================================
+   INNER PANEL
+===================================================== */
+
+.about-panel-inner {
+
+    position: relative;
+
+    min-height: 100%;
+
+    padding: 55px 10px 25px;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+#closeAbout {
+
+    position: absolute;
+
+    top: 15px;
+    right: 10px;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #9d4edd;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition:
+        0.3s ease;
+
+}
+
+
+#closeAbout:hover {
+
+    color: #ff4fd8;
+
+    border-color: #ff4fd8;
+
+    transform:
+        rotate(90deg)
+        scale(1.08);
+
+    box-shadow:
+        0 0 10px #ff4fd8,
+        0 0 25px #9d4edd,
+        0 0 40px rgba(57, 255, 20, 0.2);
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.about-panel-label {
+
+    margin-bottom: 8px;
+
+    color: #39ff14;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 8px #39ff14,
+        0 0 18px rgba(57, 255, 20, 0.5);
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+#aboutPanel h2 {
+
+    margin: 0;
+
+    font-size: clamp(28px, 3vw, 38px);
+
+    letter-spacing: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9d4edd,
+            #ff4fd8,
+            #39ff14
+        );
+
+    background-size: 200% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        gradientMove 5s ease-in-out infinite;
+
+}
+
+
+/* =====================================================
+   LINE
+===================================================== */
+
+.about-panel-line {
+
+    width: 100%;
+
+    height: 1px;
+
+    margin: 18px 0 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9d4edd,
+            #ff4fd8,
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px #9d4edd;
+}
+
+
+/* =====================================================
+   PHOTO GALLERY
+===================================================== */
+
+.about-gallery {
+
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    touch-action: pan-y;
+
+    user-select: none;
+
+}
+
+
+/* =====================================================
+   INSTAGRAM-STYLE PHOTO FRAME
+===================================================== */
+
+.about-photo-frame {
+
+    position: relative;
+
+    width: 100%;
+
+    /*
+       Чуть длиннее портретный формат,
+       чтобы фотографии красиво помещались
+    */
+
+    aspect-ratio: 4 / 5.2;
+
+    padding: 5px;
+
+    overflow: hidden;
+
+    border:
+        1px solid #ff4fd8;
+
+    border-radius: 15px;
+
+    background: #030303;
+
+    box-shadow:
+
+        0 0 10px rgba(255, 79, 216, 0.65),
+
+        0 0 25px rgba(157, 78, 221, 0.5),
+
+        0 0 50px rgba(157, 78, 221, 0.15),
+
+        inset 0 0 20px rgba(255, 79, 216, 0.12);
+
+}
+
+
+/* INNER NEON BORDER */
+
+.about-photo-frame::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 4px;
+
+    border:
+        1px solid rgba(157, 78, 221, 0.6);
+
+    border-radius: 11px;
+
+    pointer-events: none;
+
+    z-index: 10;
+
+    box-shadow:
+        inset 0 0 12px rgba(157, 78, 221, 0.4);
+}
+
+
+/* MOVING LIGHT */
+
+.about-photo-frame::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 60%;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ffffff,
+            #ff4fd8,
+            transparent
+        );
+
+    box-shadow:
+        0 0 10px #ff4fd8,
+        0 0 20px #9d4edd;
+
+    z-index: 11;
+
+    animation:
+        photoFrameLight 4s linear infinite;
+}
+
+
+/* =====================================================
+   PHOTOS
+===================================================== */
+
+.about-photo {
+
+    position: absolute;
+
+    top: 5px;
+    left: 5px;
+
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    opacity: 0;
+
+    transform: scale(1.04);
+
+    transition:
+        opacity 0.7s ease,
+        transform 1s ease;
+
+    pointer-events: none;
+
+}
+
+
+/* ACTIVE PHOTO */
+
+.about-photo.active {
+
+    opacity: 1;
+
+    transform: scale(1);
+
+}
+
+
+/* =====================================================
+   DOTS
+===================================================== */
+
+.about-dots {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 12px;
+
+}
+
+
+.about-dot {
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transition:
+        0.3s ease;
+
+}
+
+
+.about-dot.active {
+
+    width: 8px;
+    height: 8px;
+
+    background: #ff4fd8;
+
+    box-shadow:
+        0 0 7px #ff4fd8,
+        0 0 15px rgba(255, 79, 216, 0.8);
+}
+
+
+/* =====================================================
+   SWIPE TEXT
+===================================================== */
+
+.about-gallery-hint {
+
+    margin-top: 8px;
+
+    text-align: center;
+
+    color:
+        rgba(255, 255, 255, 0.3);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+#aboutPanel .about-description {
+
+    margin: 0 0 20px;
+
+    color:
+        rgba(255, 255, 255, 0.68);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.about-panel-skills {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.about-panel-skills span {
+
+    padding: 10px 12px;
+
+    border:
+        1px solid rgba(157, 78, 221, 0.4);
+
+    border-left:
+        2px solid #9d4edd;
+
+    border-radius: 7px;
+
+    background:
+        rgba(157, 78, 221, 0.04);
+
+    color: #39ff14;
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+
+    transition:
+        0.3s ease;
+
+}
+
+
+.about-panel-skills span:hover {
+
+    border-color: #39ff14;
+
+    border-left-color: #39ff14;
+
+    transform: translateX(4px);
+
+    box-shadow:
+        0 0 12px rgba(57, 255, 20, 0.15);
+
+}
+
+
+/* =====================================================
+   READY FOR PROJECTS
+===================================================== */
+
+.about-status {
+
+    position: relative;
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border:
+        1px solid rgba(70, 255, 140, 0.65);
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(70, 255, 140, 0.06),
+            rgba(0, 0, 0, 0.4)
+        );
+
+    box-shadow:
+        0 0 10px rgba(70, 255, 140, 0.12),
+        inset 0 0 15px rgba(70, 255, 140, 0.03);
+
+    animation:
+        aboutStatusGlow 4s ease-in-out infinite;
+
+}
+
+
+.about-status-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #46ff8c;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.4px;
+
+    text-shadow:
+        0 0 8px rgba(70, 255, 140, 0.7);
+
+}
+
+
+.about-status-dot {
+
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #46ff8c;
+
+    box-shadow:
+        0 0 6px #46ff8c,
+        0 0 15px #46ff8c;
+
+    animation:
+        aboutStatusDot 1.5s ease-in-out infinite;
+
+}
+
+
+.about-status p {
+
+    margin:
+        8px 0 0 !important;
+
+    color:
+        rgba(255, 255, 255, 0.45) !important;
+
+    font-size:
+        10px !important;
+
+    line-height:
+        1.5 !important;
+
+}
+
+
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+
+@keyframes photoFrameLight {
+
+    0% {
+        left: -60%;
+    }
+
+    100% {
+        left: 120%;
+    }
+
+}
+
+
+@keyframes aboutStatusDot {
+
+    0%,
+    100% {
+
+        opacity: 0.5;
+
+        transform: scale(0.8);
+
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform: scale(1.15);
+
+        box-shadow:
+            0 0 6px #46ff8c,
+            0 0 15px #46ff8c,
+            0 0 25px rgba(70, 255, 140, 0.8);
+
+    }
+
+}
+
+
+@keyframes aboutStatusGlow {
+
+    0%,
+    100% {
+
+        box-shadow:
+            0 0 8px rgba(70, 255, 140, 0.1),
+            inset 0 0 12px rgba(70, 255, 140, 0.02);
+
+    }
+
+    50% {
+
+        box-shadow:
+            0 0 15px rgba(70, 255, 140, 0.25),
+            0 0 30px rgba(70, 255, 140, 0.08),
+            inset 0 0 18px rgba(70, 255, 140, 0.05);
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    #aboutPanel {
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        max-width: none;
+
+        height: 100vh;
+
+        padding: 15px;
+
+        border-radius: 0;
+
+        transform:
+            translateX(-100%);
+
+    }
+
+
+    #aboutPanel.active {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    .about-panel-inner {
+
+        padding:
+            55px 10px 25px;
+
+    }
+
+
+    #aboutPanel h2 {
+
+        font-size: 27px;
+
+    }
+
+
+    .about-photo-frame {
+
+        aspect-ratio: 4 / 5;
+
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+    #aboutPanel {
+
+        padding: 10px;
+
+    }
+
+    .about-panel-inner {
+
+        padding:
+            50px 8px 20px;
+
+    }
+
+    .about-photo-frame {
+
+        aspect-ratio: 4 / 4.8;
+
+    }
+
+}
