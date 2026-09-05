@@ -1,18 +1,19 @@
+/* ========================================
+   BACK TO TOP
+======================================== */
+
 const backToTop = document.getElementById("backToTop");
 
 if (backToTop) {
 
-    function updateBackToTop() {
+    window.addEventListener("scroll", () => {
 
-        if (window.scrollY > 1) {
+        if (window.scrollY > 100) {
             backToTop.classList.add("show");
         } else {
             backToTop.classList.remove("show");
         }
 
-    }
-    window.addEventListener("scroll", updateBackToTop, {
-        passive: true
     });
 
     backToTop.addEventListener("click", () => {
@@ -24,11 +25,12 @@ if (backToTop) {
 
     });
 
-    updateBackToTop();
 }
-// ==============================
-// CURSOR GLOW
-// ==============================
+
+
+/* ========================================
+   CURSOR GLOW
+======================================== */
 
 const cursorGlow = document.getElementById("cursorGlow");
 
@@ -36,187 +38,293 @@ if (cursorGlow) {
 
     document.addEventListener("mousemove", (event) => {
 
-        cursorGlow.style.left = event.clientX + "px";
-        cursorGlow.style.top = event.clientY + "px";
+        cursorGlow.style.left =
+            event.clientX + "px";
+
+        cursorGlow.style.top =
+            event.clientY + "px";
 
     });
 
 }
 
 
-// ==============================
-// ABOUT ME PANEL
-// ==============================
+/* ========================================
+   ABOUT PANEL
+======================================== */
 
-const aboutButton = document.getElementById("aboutButton");
-const aboutPanel = document.getElementById("aboutPanel");
-const closeAbout = document.getElementById("closeAbout");
+const aboutButton =
+    document.getElementById("aboutButton");
 
-let aboutScrollPosition = 0;
+const aboutPanel =
+    document.getElementById("aboutPanel");
 
-
-// OPEN ABOUT
-function openAbout() {
-
-    if (!aboutPanel) return;
-
-    aboutScrollPosition = window.scrollY;
-
-    document.body.classList.add("about-open");
-
-    aboutPanel.classList.add("active");
-
-}
+const closeAbout =
+    document.getElementById("closeAbout");
 
 
-// CLOSE ABOUT
-function closeAboutPanel() {
+if (aboutButton && aboutPanel) {
 
-    if (!aboutPanel) return;
+    aboutButton.addEventListener("click", () => {
 
-    aboutPanel.classList.remove("active");
-
-    document.body.classList.remove("about-open");
-
-    window.scrollTo({
-        top: aboutScrollPosition,
-        left: 0,
-        behavior: "instant"
-    });
-
-}
-
-
-// ABOUT BUTTON
-if (aboutButton) {
-
-    aboutButton.addEventListener("click", (event) => {
-
-        event.stopPropagation();
-
-        openAbout();
+        aboutPanel.classList.add("active");
 
     });
 
 }
 
 
-// CLOSE BUTTON
-if (closeAbout) {
+if (closeAbout && aboutPanel) {
 
-    closeAbout.addEventListener("click", (event) => {
+    closeAbout.addEventListener("click", () => {
 
-        event.stopPropagation();
-
-        closeAboutPanel();
+        aboutPanel.classList.remove("active");
 
     });
 
 }
 
 
-// CLICK OUTSIDE
 document.addEventListener("click", (event) => {
 
-    if (!aboutPanel || !aboutButton) return;
-
     if (
+        aboutPanel &&
+        aboutButton &&
         aboutPanel.classList.contains("active") &&
         !aboutPanel.contains(event.target) &&
         !aboutButton.contains(event.target)
     ) {
 
-        closeAboutPanel();
+        aboutPanel.classList.remove("active");
 
     }
 
 });
 
 
-// ==============================
-// ABOUT ME SWIPE LEFT
-// ==============================
+/* ========================================
+   ABOUT PHOTO GALLERY
+======================================== */
 
-let swipeStartX = 0;
-let swipeStartY = 0;
+const gallery =
+    document.getElementById("aboutGallery");
 
-if (aboutPanel) {
+const photos =
+    document.querySelectorAll(".about-photo");
 
-    aboutPanel.addEventListener("touchstart", (event) => {
+const dots =
+    document.querySelectorAll(".about-dot");
 
-        const touch = event.changedTouches[0];
 
-        swipeStartX = touch.clientX;
-        swipeStartY = touch.clientY;
+let currentPhoto = 0;
 
-    }, {
-        passive: true
+let galleryInterval;
+
+
+/* SHOW PHOTO */
+
+function showPhoto(index) {
+
+    if (!photos.length) return;
+
+    if (index >= photos.length) {
+        currentPhoto = 0;
+    }
+
+    else if (index < 0) {
+        currentPhoto = photos.length - 1;
+    }
+
+    else {
+        currentPhoto = index;
+    }
+
+
+    photos.forEach((photo, i) => {
+
+        photo.classList.toggle(
+            "active",
+            i === currentPhoto
+        );
+
     });
 
 
-    aboutPanel.addEventListener("touchend", (event) => {
+    dots.forEach((dot, i) => {
 
-        const touch = event.changedTouches[0];
+        dot.classList.toggle(
+            "active",
+            i === currentPhoto
+        );
 
-        const swipeEndX = touch.clientX;
-        const swipeEndY = touch.clientY;
-
-        const distanceX = swipeEndX - swipeStartX;
-        const distanceY = swipeEndY - swipeStartY;
-
-        const horizontalSwipe =
-            Math.abs(distanceX) > Math.abs(distanceY);
-
-        const swipeLeft =
-            distanceX < -50;
-
-
-        if (
-            horizontalSwipe &&
-            swipeLeft
-        ) {
-
-            closeAboutPanel();
-
-        }
-
-    }, {
-        passive: true
     });
 
 }
 
 
-// ==============================
-// REVEAL ANIMATION
-// ==============================
+/* NEXT PHOTO */
 
-const revealElements = document.querySelectorAll(".reveal");
+function nextPhoto() {
 
-if (revealElements.length > 0) {
+    showPhoto(currentPhoto + 1);
 
-    const revealObserver = new IntersectionObserver(
-        (entries) => {
+}
 
-            entries.forEach((entry) => {
 
-                if (entry.isIntersecting) {
+/* PREVIOUS PHOTO */
 
-                    entry.target.classList.add("visible");
+function previousPhoto() {
 
-                } else {
+    showPhoto(currentPhoto - 1);
 
-                    entry.target.classList.remove("visible");
+}
 
-                }
 
-            });
+/* AUTO SLIDER */
+
+function startGallery() {
+
+    if (photos.length <= 1) return;
+
+    galleryInterval = setInterval(() => {
+
+        nextPhoto();
+
+    }, 4000);
+
+}
+
+
+function restartGallery() {
+
+    clearInterval(galleryInterval);
+
+    startGallery();
+
+}
+
+
+/* DOT CLICK */
+
+dots.forEach((dot, index) => {
+
+    dot.addEventListener("click", () => {
+
+        showPhoto(index);
+
+        restartGallery();
+
+    });
+
+});
+
+
+/* ========================================
+   MOBILE SWIPE
+======================================== */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+
+if (gallery) {
+
+    gallery.addEventListener(
+        "touchstart",
+        (event) => {
+
+            touchStartX =
+                event.changedTouches[0].screenX;
 
         },
-        {
-            threshold: 0.15
-        }
+        { passive: true }
     );
+
+
+    gallery.addEventListener(
+        "touchend",
+        (event) => {
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+            const swipeDistance =
+                touchEndX - touchStartX;
+
+
+            /* SWIPE LEFT */
+
+            if (swipeDistance < -50) {
+
+                nextPhoto();
+
+                restartGallery();
+
+            }
+
+
+            /* SWIPE RIGHT */
+
+            if (swipeDistance > 50) {
+
+                previousPhoto();
+
+                restartGallery();
+
+            }
+
+        },
+        { passive: true }
+    );
+
+}
+
+
+/* START */
+
+showPhoto(0);
+
+startGallery();
+
+
+/* ========================================
+   REVEAL ANIMATION
+======================================== */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+
+if ("IntersectionObserver" in window) {
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                    } else {
+
+                        entry.target.classList.remove(
+                            "visible"
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
 
 
     revealElements.forEach((element) => {
@@ -228,9 +336,9 @@ if (revealElements.length > 0) {
 }
 
 
-// ==============================
-// SHOOTING STARS
-// ==============================
+/* ========================================
+   SHOOTING STARS
+======================================== */
 
 const shootingStars =
     document.getElementById("shootingStars");
@@ -240,15 +348,23 @@ function createShootingStar() {
 
     if (!shootingStars) return;
 
-    const star = document.createElement("div");
 
-    star.classList.add("shooting-star");
+    const star =
+        document.createElement("div");
+
+
+    star.classList.add(
+        "shooting-star"
+    );
+
 
     star.style.left =
         Math.random() * 100 + "%";
 
+
     star.style.animationDuration =
-        (1 + Math.random() * 1) + "s";
+        (1 + Math.random() * 1.5) + "s";
+
 
     shootingStars.appendChild(star);
 
@@ -273,23 +389,28 @@ setInterval(() => {
 }, 2500);
 
 
-// ==============================
-// SERVICE CARDS
-// ==============================
+/* ========================================
+   SERVICES
+======================================== */
 
-const serviceCards = document.querySelectorAll(".service-card");
+const serviceCards =
+    document.querySelectorAll(".service-card");
+
 
 serviceCards.forEach((card) => {
 
-    card.addEventListener("click", function () {
-        this.classList.toggle("active");
+    card.addEventListener("click", () => {
+
+        card.classList.toggle("active");
+
     });
 
 });
 
-// ==============================
-// PROJECT STAR
-// ==============================
+
+/* ========================================
+   PROJECT STAR
+======================================== */
 
 const projectStar =
     document.querySelector(".project-star");
@@ -297,35 +418,49 @@ const projectStar =
 
 if (projectStar) {
 
-    projectStar.addEventListener("click", (event) => {
+    projectStar.addEventListener(
+        "click",
+        (event) => {
 
-        event.preventDefault();
-
-        const targetPage =
-            projectStar.href;
-
-        projectStar.classList.add("redirecting");
+            event.preventDefault();
 
 
-        setTimeout(() => {
+            const targetPage =
+                projectStar.href;
 
-            window.location.href =
-                targetPage;
 
-        }, 1500);
+            if (aboutPanel) {
 
-    });
+                aboutPanel.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            projectStar.classList.add(
+                "redirecting"
+            );
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    targetPage;
+
+            }, 1500);
+
+        }
+    );
+
+
+    /* FIX AFTER BACK BUTTON */
 
     window.addEventListener("pageshow", () => {
 
-        projectStar.classList.remove("redirecting");
-
-    });
-
-
-    window.addEventListener("pagehide", () => {
-
-        projectStar.classList.remove("redirecting");
+        projectStar.classList.remove(
+            "redirecting"
+        );
 
     });
 

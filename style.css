@@ -2286,3 +2286,546 @@ footer {
         transform: scale(1.15);
     }
 }
+/* ========================================
+   ABOUT PANEL — NEON PHOTO GALLERY
+======================================== */
+
+#aboutPanel {
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+
+    width: clamp(300px, 25vw, 420px);
+    height: calc(100vh - 40px);
+
+    padding: 80px 30px 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20, 5, 25, 0.98),
+            rgba(3, 3, 3, 0.99)
+        );
+
+    border: 1px solid #9d4edd;
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 20px rgba(157, 78, 221, 0.35),
+        0 0 50px rgba(255, 79, 216, 0.15),
+        inset 0 0 25px rgba(157, 78, 221, 0.08);
+
+    transform: translateX(calc(-100% - 40px));
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.4s ease;
+
+    z-index: 2000;
+
+    overflow-y: auto;
+
+    pointer-events: none;
+}
+
+
+/* OPEN PANEL */
+
+#aboutPanel.active {
+    transform: translateX(0);
+
+    pointer-events: auto;
+
+    box-shadow:
+        0 0 25px rgba(157, 78, 221, 0.5),
+        0 0 70px rgba(255, 79, 216, 0.2),
+        inset 0 0 30px rgba(157, 78, 221, 0.1);
+}
+
+
+/* CLOSE BUTTON */
+
+#closeAbout {
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #9d4edd;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    z-index: 10;
+}
+
+#closeAbout:hover {
+    color: #ff4fd8;
+
+    border-color: #ff4fd8;
+
+    box-shadow:
+        0 0 10px #ff4fd8,
+        0 0 25px rgba(255, 79, 216, 0.5);
+
+    transform: rotate(90deg);
+}
+
+
+/* ABOUT TITLE */
+
+#aboutPanel h2 {
+    margin-bottom: 25px;
+
+    color: white;
+
+    font-size: 28px;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px #9d4edd,
+        0 0 25px rgba(157, 78, 221, 0.6);
+}
+
+
+/* ========================================
+   PHOTO GALLERY
+======================================== */
+
+.about-gallery {
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    touch-action: pan-y;
+
+    user-select: none;
+}
+
+
+/* NEON FRAME */
+
+.about-photo-frame {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    padding: 5px;
+
+    border: 1px solid #ff4fd8;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    background: #050505;
+
+    box-shadow:
+        0 0 10px rgba(255, 79, 216, 0.6),
+        0 0 25px rgba(157, 78, 221, 0.4),
+        inset 0 0 15px rgba(255, 79, 216, 0.15);
+}
+
+
+/* NEON INNER LINE */
+
+.about-photo-frame::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 3px;
+
+    border: 1px solid rgba(157, 78, 221, 0.5);
+
+    border-radius: 11px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    box-shadow:
+        inset 0 0 12px rgba(157, 78, 221, 0.4);
+}
+
+
+/* PHOTOS */
+
+.about-photo {
+    position: absolute;
+
+    top: 5px;
+    left: 5px;
+
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    opacity: 0;
+
+    transform: scale(1.03);
+
+    transition:
+        opacity 0.7s ease,
+        transform 1s ease;
+
+    pointer-events: none;
+}
+
+
+/* ACTIVE PHOTO */
+
+.about-photo.active {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+
+/* ========================================
+   PHOTO DOTS
+======================================== */
+
+.about-dots {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+
+.about-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    transition: 0.3s;
+
+    box-shadow: 0 0 0 transparent;
+}
+
+
+.about-dot.active {
+    width: 9px;
+    height: 9px;
+
+    background: #ff4fd8;
+
+    box-shadow:
+        0 0 8px #ff4fd8,
+        0 0 18px rgba(255, 79, 216, 0.7);
+}
+
+
+/* SWIPE TEXT */
+
+.about-gallery-hint {
+    display: block;
+
+    margin-top: 10px;
+
+    text-align: center;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: rgba(255, 255, 255, 0.35);
+}
+
+
+/* ========================================
+   ABOUT TEXT
+======================================== */
+
+#aboutPanel p {
+    color: rgba(255, 255, 255, 0.75);
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+/* ========================================
+   SKILLS
+======================================== */
+
+.about-panel-skills {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.about-panel-skills span {
+    display: block;
+
+    padding: 10px 12px;
+
+    border: 1px solid rgba(157, 78, 221, 0.45);
+
+    border-radius: 8px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    background: rgba(157, 78, 221, 0.05);
+
+    transition: 0.3s;
+}
+
+
+.about-panel-skills span:hover {
+    color: white;
+
+    border-color: #ff4fd8;
+
+    box-shadow:
+        0 0 10px rgba(255, 79, 216, 0.25);
+
+    transform: translateX(5px);
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+
+    #aboutPanel {
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        max-width: none;
+
+        height: 100vh;
+
+        padding:
+            80px 25px 30px;
+
+        border-radius: 0;
+
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
+
+        transform: translateX(-100%);
+    }
+
+    #aboutPanel.active {
+        transform: translateX(0);
+    }
+
+    #aboutPanel h2 {
+        font-size: 24px;
+    }
+
+    .about-photo-frame {
+        aspect-ratio: 4 / 5;
+    }
+
+    .about-gallery-hint {
+        display: block;
+    }
+}
+/* ========================================
+   HIDE ABOUT PANEL SCROLLBAR
+======================================== */
+
+#aboutPanel {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#aboutPanel::-webkit-scrollbar {
+    display: none;
+}
+/* ========================================
+   ABOUT — READY FOR PROJECTS
+======================================== */
+
+.about-status {
+    position: relative;
+
+    margin-top: 25px;
+    padding: 18px;
+
+    border: 1px solid rgba(70, 255, 140, 0.7);
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(40, 255, 130, 0.06),
+            rgba(0, 0, 0, 0.35)
+        );
+
+    box-shadow:
+        0 0 10px rgba(70, 255, 140, 0.15),
+        0 0 25px rgba(70, 255, 140, 0.08),
+        inset 0 0 15px rgba(70, 255, 140, 0.04);
+
+    overflow: hidden;
+
+    animation: aboutStatusGlow 4s ease-in-out infinite;
+}
+
+
+.about-status::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 15%;
+
+    width: 70%;
+    height: 1px;
+
+    background: #46ff8c;
+
+    box-shadow:
+        0 0 8px #46ff8c,
+        0 0 18px rgba(70, 255, 140, 0.8);
+}
+
+
+/* STATUS TITLE */
+
+.about-status-top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #46ff8c;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    text-shadow:
+        0 0 8px rgba(70, 255, 140, 0.7);
+}
+
+
+/* GREEN DOT */
+
+.about-status-dot {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #46ff8c;
+
+    box-shadow:
+        0 0 5px #46ff8c,
+        0 0 12px #46ff8c,
+        0 0 22px rgba(70, 255, 140, 0.8);
+
+    animation: aboutStatusDot 1.5s ease-in-out infinite;
+}
+
+
+/* STATUS DESCRIPTION */
+
+.about-status p {
+    margin: 10px 0 0 !important;
+
+    color: rgba(255, 255, 255, 0.55) !important;
+
+    font-size: 11px !important;
+
+    line-height: 1.5 !important;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* ========================================
+   STATUS ANIMATION
+======================================== */
+
+@keyframes aboutStatusDot {
+
+    0%,
+    100% {
+        transform: scale(0.8);
+
+        opacity: 0.55;
+    }
+
+    50% {
+        transform: scale(1.15);
+
+        opacity: 1;
+
+        box-shadow:
+            0 0 6px #46ff8c,
+            0 0 15px #46ff8c,
+            0 0 28px rgba(70, 255, 140, 0.9);
+    }
+
+}
+
+
+@keyframes aboutStatusGlow {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 10px rgba(70, 255, 140, 0.12),
+            0 0 25px rgba(70, 255, 140, 0.06),
+            inset 0 0 15px rgba(70, 255, 140, 0.03);
+    }
+
+    50% {
+        box-shadow:
+            0 0 15px rgba(70, 255, 140, 0.25),
+            0 0 35px rgba(70, 255, 140, 0.12),
+            inset 0 0 20px rgba(70, 255, 140, 0.06);
+    }
+
+}
